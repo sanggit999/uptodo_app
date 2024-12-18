@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 
-class Onboarding extends StatelessWidget {
+class OnboardingPageView extends StatelessWidget {
   final String image;
   final String title;
   final String subTitle;
+  final int? currentIndex;
 
-  const Onboarding({
+  const OnboardingPageView({
     required this.image,
     required this.title,
     required this.subTitle,
+     this.currentIndex,
     super.key,
   });
 
@@ -34,7 +37,7 @@ class Onboarding extends StatelessWidget {
                   height: 5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Colors.red,
+                    color: currentIndex == index ? AppColors.white : AppColors.lightGray,
                   ),
                 );
               },
@@ -42,6 +45,7 @@ class Onboarding extends StatelessWidget {
         const SizedBox(height: 30),
         Text(
           title,
+          textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
