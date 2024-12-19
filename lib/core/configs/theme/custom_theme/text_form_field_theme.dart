@@ -6,17 +6,10 @@ class AppTextFormFieldTheme {
 
   static InputDecorationTheme darkInputDecoration = InputDecorationTheme(
     filled: true,
-    fillColor: AppColors.lightGray,
-    hintStyle:
-    const TextStyle(color: AppColors.darkGray, fontWeight: FontWeight.w400),
+    fillColor: AppColors.darkGray,
+    hintStyle: const TextStyle(
+        color: AppColors.lightGray, fontWeight: FontWeight.w400),
     contentPadding: const EdgeInsets.all(12),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
-      borderSide: const BorderSide(
-        color: AppColors.lightGray,
-        width: 1,
-      ),
-    ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
       borderSide: const BorderSide(

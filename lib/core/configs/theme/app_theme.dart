@@ -21,6 +21,6 @@ class AppTheme {
     ),
     inputDecorationTheme: AppTextFormFieldTheme.darkInputDecoration,
     elevatedButtonTheme: AppElevateButtonTheme.darkElevatedButtonTheme,
-    appBarTheme: AppAppBarTheme.appBarTheme
+    appBarTheme: AppAppBarTheme.appBarTheme,
   );
 }
