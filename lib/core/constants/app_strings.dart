@@ -28,6 +28,6 @@ class AppStrings {
   static const String confirmPassword = 'Nhập lại mật khẩu';
   static const String enterYourUsername = 'Nhập tên người dùng của bạn';
   static const String enterYourPassword = 'Nhập mật khẩu xcủa bạn';
-  static const String dontHaveAnAccount = 'Chưa có tài khoản?';
+  static const String dontHaveAnAccount = 'Chưa có tài khoản? ';
   static const String alreadyHaveAnAccount = 'Đã có tài khoản?';
 }

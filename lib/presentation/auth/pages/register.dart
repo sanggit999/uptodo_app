@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo_app/common/widgets/button/basic_app_button.dart';
@@ -56,8 +57,10 @@ class RegisterPage extends StatelessWidget {
                     _titleConfirmPassword(),
                     const SizedBox(height: 5),
                     _confirmPasswordField(),
-                    const SizedBox(height: 100),
-                    _registerButton()
+                    const SizedBox(height: 50),
+                    _registerButton(),
+                    const SizedBox(height: 10),
+                    _titleAlreadyHaveAccount(context)
                   ],
                 )),
           ],
@@ -137,6 +140,30 @@ class RegisterPage extends StatelessWidget {
     return BasicAppButton(
       onPressed: () {},
       title: AppStrings.register,
+    );
+  }
+
+
+  Widget _titleAlreadyHaveAccount(BuildContext context) {
+    return Text.rich(
+      TextSpan(
+          text: AppStrings.alreadyHaveAnAccount,
+          style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.lightGray,
+              fontWeight: FontWeight.w400),
+          children: [
+            TextSpan(
+                text: AppStrings.login,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    context.push('/login');
+                  },
+                style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w400))
+          ]),
     );
   }
 }

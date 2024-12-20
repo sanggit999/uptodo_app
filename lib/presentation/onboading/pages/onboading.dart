@@ -44,9 +44,9 @@ class OnboadingPage extends StatelessWidget {
             },
             child: Text(
               AppStrings.skip.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
-                color: AppColors.white.withOpacity(0.5),
+                color: AppColors.lightGray,
                 fontWeight: FontWeight.w400,
               ),
             )));
@@ -96,9 +96,9 @@ class OnboadingPage extends StatelessWidget {
                 },
                 child: Text(
                   AppStrings.back.toUpperCase(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
-                    color: AppColors.white.withOpacity(0.5),
+                    color: AppColors.lightGray,
                     fontWeight: FontWeight.w400,
                   ),
                 ))

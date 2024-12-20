@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uptodo_app/common/widgets/appbar/basic_app_bar.dart';
 import 'package:uptodo_app/common/widgets/button/basic_app_button.dart';
 import 'package:uptodo_app/common/widgets/text_form_field/basic_text_form_field.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
@@ -15,24 +17,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(top: 16, left: 16),
-          child: IconButton(
-              onPressed: () {
-                context.pop();
-              },
-              icon: const SizedBox(
-                height: 50,
-                width: 50,
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  size: 24,
-                  color: AppColors.white,
-                ),
-              )),
-        ),
-      ),
+      appBar: const BasicAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -53,7 +38,9 @@ class LoginPage extends StatelessWidget {
                     const SizedBox(height: 5),
                     _passwordField(),
                     const SizedBox(height: 50),
-                    _loginButton()
+                    _loginButton(),
+                    const SizedBox(height: 10),
+                    _titleDontHaveAccount(context)
                   ],
                 )),
           ],
@@ -117,7 +104,26 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _titleAlreadyHaveAccount(){
-    return Container();
+  Widget _titleDontHaveAccount(BuildContext context) {
+    return Text.rich(
+      TextSpan(
+          text: AppStrings.dontHaveAnAccount,
+          style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.lightGray,
+              fontWeight: FontWeight.w400),
+          children: [
+            TextSpan(
+                text: AppStrings.register,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    context.push('/register');
+                  },
+                style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w400))
+          ]),
+    );
   }
 }
