@@ -90,6 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     builder: (context, state) {
                   return Form(
                       key: _formKey,
+                      onChanged: onChanged,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -212,8 +213,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       useCase: SignupUseCase(
                           AuthRepositoryImpl(AuthApiServiceImpl(DioClient()))),
                       params: SignUpReq(
-                        username: _usernameController.text.toString(),
-                        password: _passwordController.text.toString(),
+                        username: _usernameController.text,
+                        password: _passwordController.text,
                       ),
                     );
               }
