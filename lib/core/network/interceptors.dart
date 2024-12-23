@@ -26,8 +26,9 @@ class LoggerInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final options = err.requestOptions;
     final requestPath = '${options.baseUrl}${options.path}';
-    logger.e('${options.method} request => $requestPath'); // Error log
-    logger.d('Error type: ${err.error} \n'
+    logger.e('${options.method} request => $requestPath \n'
+        'Response Data: ${err.response?.data}'); // Error log
+    logger.d('Error type: ${err.type} \n'
         'Error massage: ${err.message}'); // Debug log
     handler.next(err); // Tiếp tục với error
   }

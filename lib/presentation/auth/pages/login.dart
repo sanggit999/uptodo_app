@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo_app/common/cubit/button_cubit.dart';
+import 'package:uptodo_app/common/cubit/button_state.dart';
 import 'package:uptodo_app/common/widgets/appbar/basic_app_bar.dart';
 import 'package:uptodo_app/common/widgets/button/basic_reactive_button.dart';
 import 'package:uptodo_app/common/widgets/text_form_field/basic_text_form_field.dart';
@@ -26,35 +27,51 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ButtonCubit(),
-      child: Scaffold(
-        appBar: const BasicAppBar(),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _login(),
-              const SizedBox(height: 30),
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _titleUserName(),
-                    const SizedBox(height: 5),
-                    _usernameField(),
-                    const SizedBox(height: 20),
-                    _titlePassword(),
-                    const SizedBox(height: 5),
-                    _passwordField(),
-                    const SizedBox(height: 50),
-                    _loginButton(context),
-                    const SizedBox(height: 10),
-                    _titleDontHaveAccount(context)
-                  ],
-                ),
+      child: BlocListener<ButtonCubit, ButtonState>(
+        listener: (context, state) {
+          if (state is ButtonFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                behavior: SnackBarBehavior.floating,
               ),
-            ],
+            );
+          }
+
+          if (state is ButtonSuccess) {
+            context.go('/home');
+          }
+        },
+        child: Scaffold(
+          appBar: const BasicAppBar(),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _login(),
+                const SizedBox(height: 30),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _titleUserName(),
+                      const SizedBox(height: 5),
+                      _usernameField(),
+                      const SizedBox(height: 20),
+                      _titlePassword(),
+                      const SizedBox(height: 5),
+                      _passwordField(),
+                      const SizedBox(height: 50),
+                      _loginButton(context),
+                      const SizedBox(height: 10),
+                      _titleDontHaveAccount(context)
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -110,19 +127,21 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _loginButton(BuildContext context) {
-    return BasicReactiveButton(
-      onPressed: () {
-        context.read<ButtonCubit>().execute(
-              useCase: SigninUseCase(
-                  AuthRepositoryImpl(AuthApiServiceImpl(DioClient()))),
-              params: SignInReq(
-                username: _usernameController.text,
-                password: _passwordController.text,
-              ),
-            );
-      },
-      title: AppStrings.login,
-    );
+    return Builder(builder: (context) {
+      return BasicReactiveButton(
+        onPressed: () {
+          context.read<ButtonCubit>().execute(
+                useCase: SigninUseCase(
+                    AuthRepositoryImpl(AuthApiServiceImpl(DioClient()))),
+                params: SignInReq(
+                  username: _usernameController.text.toString(),
+                  password: _passwordController.text.toString(),
+                ),
+              );
+        },
+        title: AppStrings.login,
+      );
+    });
   }
 
   Widget _titleDontHaveAccount(BuildContext context) {

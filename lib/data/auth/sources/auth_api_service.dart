@@ -3,9 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:uptodo_app/core/constants/app_url.dart';
 import 'package:uptodo_app/core/network/dio_client.dart';
 import 'package:uptodo_app/data/auth/models/signin_req.dart';
+import 'package:uptodo_app/data/auth/models/signup_req.dart';
 
 abstract class AuthApiService {
   Future<Either> signin(SignInReq signInReq);
+
+  Future<Either> signup(SignUpReq signUpReq);
 }
 
 class AuthApiServiceImpl implements AuthApiService {
@@ -18,7 +21,18 @@ class AuthApiServiceImpl implements AuthApiService {
     try {
       var response =
           await dioClient.post(AppUrl.signin, data: signInReq.toMap());
-      return Right(response);
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(e.response!.data['message']);
+    }
+  }
+
+  @override
+  Future<Either> signup(SignUpReq signUpReq) async {
+    try {
+      var response =
+          await dioClient.post(AppUrl.signup, data: signUpReq.toMap());
+      return Right(response.data);
     } on DioException catch (e) {
       return Left(e.response!.data['message']);
     }

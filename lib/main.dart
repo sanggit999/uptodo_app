@@ -6,6 +6,8 @@ import 'package:uptodo_app/core/navigation/app_router.dart';
 import 'package:uptodo_app/presentation/splash/cubit/splash_cubit.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
