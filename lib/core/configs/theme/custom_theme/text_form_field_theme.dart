@@ -6,7 +6,7 @@ class AppTextFormFieldTheme {
 
   static InputDecorationTheme darkInputDecoration = InputDecorationTheme(
     filled: true,
-    fillColor: AppColors.darkGray,
+    fillColor: AppColors.darkGray.withOpacity(0.5),
     hintStyle: const TextStyle(
         color: AppColors.lightGray, fontWeight: FontWeight.w400),
     contentPadding: const EdgeInsets.all(12),

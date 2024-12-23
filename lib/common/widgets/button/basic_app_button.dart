@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 
 class BasicAppButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final Function()? onPressed;
   final double? width;
   final double? height;
   final String title;
@@ -12,7 +12,7 @@ class BasicAppButton extends StatelessWidget {
 
   const BasicAppButton(
       {super.key,
-      required this.onPressed,
+      this.onPressed,
       this.width,
       this.height,
       this.title = '',
@@ -27,8 +27,10 @@ class BasicAppButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             side: side,
             backgroundColor: backgroundColor,
-            minimumSize:
-                Size(width ?? MediaQuery.of(context).size.width, height ?? 50)),
+            minimumSize: Size(
+              width ?? MediaQuery.of(context).size.width,
+              height ?? 50,
+            )),
         child: widget ??
             Text(
               title,

@@ -5,7 +5,7 @@ import 'package:uptodo_app/common/cubit/button_state.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 
 class BasicReactiveButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final Function()? onPressed;
   final double? width;
   final double? height;
   final String title;
@@ -13,7 +13,7 @@ class BasicReactiveButton extends StatelessWidget {
 
   const BasicReactiveButton(
       {super.key,
-      required this.onPressed,
+       this.onPressed,
       this.width,
       this.height,
       this.title = '',
@@ -41,7 +41,7 @@ class BasicReactiveButton extends StatelessWidget {
                 child: CircularProgressIndicator(
                 color: AppColors.white,
               ))
-            : Text(
+            : widget ?? Text(
                 title,
                 style: const TextStyle(
                     fontSize: 16,

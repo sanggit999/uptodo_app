@@ -27,7 +27,17 @@ class AppStrings {
   static const String password = 'Mật khẩu';
   static const String confirmPassword = 'Nhập lại mật khẩu';
   static const String enterYourUsername = 'Nhập tên người dùng của bạn';
-  static const String enterYourPassword = 'Nhập mật khẩu xcủa bạn';
+  static const String enterYourPassword = 'Nhập mật khẩu của bạn';
   static const String dontHaveAnAccount = 'Chưa có tài khoản? ';
   static const String alreadyHaveAnAccount = 'Đã có tài khoản?';
+
+  static const usernameEmpty = 'Username không để trống';
+  static const usernameTooShort = 'Username quá ngắn';
+  static const usernameInvalid = 'Username không hợp lệ';
+  static const passwordEmpty = 'Mật khẩu không để trống';
+  static const passwordTooShort = 'Mật khẩu quá ngắn';
+  static const passwordInvalid = 'Mật khẩu có chữ hoa, kí tự';
+  static const passwordMismatch = 'Mật khẩu không trùng khớp';
+  static const confirmPasswordEmpty = 'Nhập lại mật khẩu không để trống';
+
 }
