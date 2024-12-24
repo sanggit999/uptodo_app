@@ -1,8 +1,9 @@
 import 'package:go_router/go_router.dart';
+import 'package:uptodo_app/app_navigation.dart';
 import 'package:uptodo_app/presentation/auth/pages/login.dart';
 import 'package:uptodo_app/presentation/auth/pages/register.dart';
 import 'package:uptodo_app/presentation/auth/pages/start.dart';
-import 'package:uptodo_app/presentation/home/pages/home.dart';
+import 'package:uptodo_app/presentation/index/pages/home.dart';
 import 'package:uptodo_app/presentation/onboading/pages/onboading.dart';
 import 'package:uptodo_app/presentation/splash/pages/splash.dart';
 
@@ -36,8 +37,13 @@ class AppRouter {
 
 
       GoRoute(
-        path: '/home',
+        path: '/index',
         builder: (context, state) => const HomePage(),
+      ),
+
+      GoRoute(
+        path: '/app_navigation',
+        builder: (context, state) => const AppNavigation(),
       ),
     ],
   );

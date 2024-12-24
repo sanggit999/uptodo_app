@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
           }
 
           if (state is ButtonSuccess) {
-            context.go('/home');
+            context.go('/app_navigation');
           }
         },
         child: Scaffold(

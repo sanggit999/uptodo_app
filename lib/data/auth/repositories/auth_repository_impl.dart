@@ -40,4 +40,16 @@ class AuthRepositoryImpl implements AuthRepository {
       },
     );
   }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    if (token == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
