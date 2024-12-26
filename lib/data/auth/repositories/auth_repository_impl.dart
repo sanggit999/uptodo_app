@@ -52,4 +52,10 @@ class AuthRepositoryImpl implements AuthRepository {
       return true;
     }
   }
+
+  @override
+  Future<Either> getUser() {
+    // TODO: implement getUser
+    throw UnimplementedError();
+  }
 }

@@ -38,7 +38,7 @@ class AppRouter {
 
       GoRoute(
         path: '/index',
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => const IndexPage(),
       ),
 
       GoRoute(

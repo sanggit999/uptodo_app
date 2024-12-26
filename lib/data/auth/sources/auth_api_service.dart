@@ -9,6 +9,8 @@ abstract class AuthApiService {
   Future<Either> signin(SignInReq signInReq);
 
   Future<Either> signup(SignUpReq signUpReq);
+
+//Future<Either> getUser();
 }
 
 class AuthApiServiceImpl implements AuthApiService {
@@ -37,4 +39,13 @@ class AuthApiServiceImpl implements AuthApiService {
       return Left(e.response!.data['message']);
     }
   }
+
+// @override
+// Future<Either> getUser() async {
+//   try{
+//
+//   }catch(e){
+//
+//   }
+// }
 }

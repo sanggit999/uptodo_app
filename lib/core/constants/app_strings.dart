@@ -40,4 +40,11 @@ class AppStrings {
   static const passwordMismatch = 'Mật khẩu không trùng khớp';
   static const confirmPasswordEmpty = 'Nhập lại mật khẩu không để trống';
 
+  static const String whatDoYouWantToDoToday = 'Hôm nay bạn muốn làm gì?';
+  static const String tapToAddTasks = 'Nhấn + để thêm công việc của bạn';
+
+  static const String index = 'Trang chủ';
+  static const String calendar = 'Lịch';
+  static const String focus = 'Tập trung';
+  static const String profile = 'Hồ sơ';
 }

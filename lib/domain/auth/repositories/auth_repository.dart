@@ -8,4 +8,6 @@ abstract class AuthRepository {
   Future<Either> signup(SignUpReq signUpReq);
 
   Future<bool> isLoggedIn();
+
+  Future<Either> getUser();
 }

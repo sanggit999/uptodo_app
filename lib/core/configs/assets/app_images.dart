@@ -10,4 +10,6 @@ class AppImages {
   static const focusOutlined = '${basePath}focus_outlined$format';
   static const profile = '${basePath}profile$format';
   static const profileOutlined = '${basePath}profile_outlined$format';
+  static const sort = '${basePath}sort$format';
+  static const profileImage = '${basePath}profile_image$format';
 }

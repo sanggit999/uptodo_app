@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo_app/core/configs/assets/app_images.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
+import 'package:uptodo_app/core/constants/app_strings.dart';
 import 'package:uptodo_app/presentation/calendar/pages/calendar.dart';
 import 'package:uptodo_app/presentation/focuse/pages/focuse.dart';
 import 'package:uptodo_app/presentation/index/pages/home.dart';
@@ -20,7 +21,7 @@ class _AppNavigationState extends State<AppNavigation> {
   @override
   void initState() {
     pages = [
-      const HomePage(),
+      const IndexPage(),
       const CalendarPage(),
       const FocusePage(),
       const ProfilePage(),
@@ -76,7 +77,7 @@ class _AppNavigationState extends State<AppNavigation> {
                           width: 24,
                         ),
                 ),
-                const Text('Trang chủ',
+                const Text(AppStrings.index,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -109,7 +110,7 @@ class _AppNavigationState extends State<AppNavigation> {
                           width: 24,
                         ),
                 ),
-                const Text('Lịch',
+                const Text(AppStrings.calendar,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -143,7 +144,7 @@ class _AppNavigationState extends State<AppNavigation> {
                           width: 24,
                         ),
                 ),
-                const Text('Tập trung',
+                const Text(AppStrings.focus,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -176,7 +177,7 @@ class _AppNavigationState extends State<AppNavigation> {
                           width: 24,
                         ),
                 ),
-                const Text('Hồ sơ',
+                const Text(AppStrings.profile,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
