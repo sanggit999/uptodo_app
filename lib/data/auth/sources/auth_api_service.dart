@@ -10,7 +10,7 @@ abstract class AuthApiService {
 
   Future<Either> signup(SignUpReq signUpReq);
 
-//Future<Either> getUser();
+  Future<Either> getUser();
 }
 
 class AuthApiServiceImpl implements AuthApiService {
@@ -40,12 +40,13 @@ class AuthApiServiceImpl implements AuthApiService {
     }
   }
 
-// @override
-// Future<Either> getUser() async {
-//   try{
-//
-//   }catch(e){
-//
-//   }
-// }
+  @override
+  Future<Either> getUser() async {
+    try {
+      var response = await dioClient.get(AppUrl.getUser);
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(e.response!.data['message']);
+    }
+  }
 }

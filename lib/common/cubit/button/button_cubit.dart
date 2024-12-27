@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uptodo_app/common/cubit/button_state.dart';
+import 'package:uptodo_app/common/cubit/button/button_state.dart';
 import 'package:uptodo_app/core/usecase/usecase.dart';
 
 class ButtonCubit extends Cubit<ButtonState> {

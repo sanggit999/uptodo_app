@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uptodo_app/common/cubit/button_cubit.dart';
-import 'package:uptodo_app/common/cubit/button_state.dart';
+import 'package:uptodo_app/common/cubit/button/button_cubit.dart';
+import 'package:uptodo_app/common/cubit/button/button_state.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 
 class BasicReactiveButton extends StatelessWidget {

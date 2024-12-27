@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uptodo_app/common/helper/mapper/user.dart';
 import 'package:uptodo_app/data/auth/models/signin_req.dart';
 import 'package:uptodo_app/data/auth/models/signup_req.dart';
+import 'package:uptodo_app/data/auth/models/user.dart';
 import 'package:uptodo_app/data/auth/sources/auth_api_service.dart';
 import 'package:uptodo_app/domain/auth/repositories/auth_repository.dart';
 
@@ -12,8 +14,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either> signin(SignInReq signInReq) async {
-    var data = await authApiService.signin(signInReq);
-    return data.fold(
+    var returnedData = await authApiService.signin(signInReq);
+    return returnedData.fold(
       (error) {
         return Left(error);
       },
@@ -27,8 +29,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either> signup(SignUpReq signUpReq) async {
-    var data = await authApiService.signup(signUpReq);
-    return data.fold(
+    var returnedData = await authApiService.signup(signUpReq);
+    return returnedData.fold(
       (error) {
         return Left(error);
       },
@@ -54,8 +56,16 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<Either> getUser() async {
+    var returnedData = await authApiService.getUser();
+    return returnedData.fold(
+      (erorr) {
+        return Left(erorr);
+      },
+      (data) {
+        var user = UserMapper.toEntity(UserModel.fromJson(data));
+        return Right(user);
+      },
+    );
   }
 }

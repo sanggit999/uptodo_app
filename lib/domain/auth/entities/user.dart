@@ -1,7 +1,7 @@
 class UserEntity {
-  final String userId;
-  final String username;
-  final String image;
+  final String? userId;
+  final String? username;
+  final String? image;
 
   UserEntity({
     required this.userId,
