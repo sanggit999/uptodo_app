@@ -51,69 +51,63 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => ButtonCubit()),
-        BlocProvider(create: (context) => ValidateFormCubit())
-      ],
-      child: BlocListener<ButtonCubit, ButtonState>(
-        listener: (context, state) {
-          if (state is ButtonFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          }
-
-          if (state is ButtonSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Đăng ký tài khoản thành công'),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-            context.go('/login');
-          }
-        },
-        child: Scaffold(
-          appBar: const BasicAppBar(),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _register(),
-                const SizedBox(height: 30),
-                BlocBuilder<ValidateFormCubit, ValidateFormState>(
-                    builder: (context, state) {
-                  return Form(
-                      key: _formKey,
-                      onChanged: onChanged,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _titleUserName(),
-                          const SizedBox(height: 5),
-                          _usernameField(context),
-                          const SizedBox(height: 20),
-                          _titlePassword(),
-                          const SizedBox(height: 5),
-                          _passwordField(context),
-                          const SizedBox(height: 20),
-                          _titleConfirmPassword(),
-                          const SizedBox(height: 5),
-                          _confirmPasswordField(context),
-                          const SizedBox(height: 50),
-                          _registerButton(context),
-                          const SizedBox(height: 10),
-                          _titleAlreadyHaveAccount(context)
-                        ],
-                      ));
-                }),
-              ],
+    return BlocListener<ButtonCubit, ButtonState>(
+      listener: (context, state) {
+        if (state is ButtonFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage),
+              behavior: SnackBarBehavior.floating,
             ),
+          );
+        }
+
+        if (state is ButtonSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Đăng ký tài khoản thành công'),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          context.go('/login');
+        }
+      },
+      child: Scaffold(
+        appBar: const BasicAppBar(),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _register(),
+              const SizedBox(height: 30),
+              BlocBuilder<ValidateFormCubit, ValidateFormState>(
+                  builder: (context, state) {
+                return Form(
+                    key: _formKey,
+                    onChanged: onChanged,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _titleUserName(),
+                        const SizedBox(height: 5),
+                        _usernameField(context),
+                        const SizedBox(height: 20),
+                        _titlePassword(),
+                        const SizedBox(height: 5),
+                        _passwordField(context),
+                        const SizedBox(height: 20),
+                        _titleConfirmPassword(),
+                        const SizedBox(height: 5),
+                        _confirmPasswordField(context),
+                        const SizedBox(height: 50),
+                        _registerButton(context),
+                        const SizedBox(height: 10),
+                        _titleAlreadyHaveAccount(context)
+                      ],
+                    ));
+              }),
+            ],
           ),
         ),
       ),

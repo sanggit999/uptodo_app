@@ -12,32 +12,29 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserDisplayCubit()..displayUserInfo(),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _sort(),
-            _title(),
-            BlocBuilder<UserDisplayCubit, UserDisplayState>(
-              builder: (context, state) {
-                if (state is UserDisplayLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+    return Padding(
+      padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _sort(),
+          _title(),
+          BlocBuilder<UserDisplayCubit, UserDisplayState>(
+            builder: (context, state) {
+              if (state is UserDisplayLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
 
-                if (state is UserDisplayLoaded) {
-                  return _profileImage(state.userEntity);
-                }
+              if (state is UserDisplayLoaded) {
+                return _profileImage(state.userEntity);
+              }
 
-                return const SizedBox();
-              },
-            ),
-          ],
-        ),
+              return const SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }

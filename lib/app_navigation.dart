@@ -38,7 +38,7 @@ class _AppNavigationState extends State<AppNavigation> {
         height: 64,
         child: FloatingActionButton(
           onPressed: () {
-            // Hành động khi nhấn nút giữa
+            _showAddTask(context);
           },
           backgroundColor: AppColors.primary,
           shape: const CircleBorder(),
@@ -188,6 +188,151 @@ class _AppNavigationState extends State<AppNavigation> {
         ),
       ),
       body: pages[selectedIndex],
+    );
+  }
+
+  Future<void> _showAddTask(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xff363636),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Wrap(
+            children: [
+              const Text(
+                'Thêm nhiệm vụ',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color(0xff363636),
+                        hintText: 'Tiêu đề',
+                        helperStyle: const TextStyle(color: Color(0xffAFAFAF)),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.white.withOpacity(0.5),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: AppColors.white.withOpacity(0.8),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color(0xff363636),
+                        hintText: 'Mô tả',
+                        helperStyle: const TextStyle(color: Color(0xffAFAFAF)),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.white.withOpacity(0.5),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: AppColors.white.withOpacity(0.8),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 9,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              IconButton(
+                                icon: Image.asset(
+                                  AppImages.timer,
+                                  width: 24,
+                                  height: 24,
+                                  fit: BoxFit.fill,
+                                  filterQuality: FilterQuality.high,
+                                ),
+                                onPressed: () {
+                                  // Logic for alarm
+                                },
+                              ),
+                              IconButton(
+                                icon: Image.asset(
+                                  AppImages.tag,
+                                  width: 24,
+                                  height: 24,
+                                  fit: BoxFit.fill,
+                                  filterQuality: FilterQuality.high,
+                                ),
+                                onPressed: () {
+                                  // Logic for category
+                                },
+                              ),
+                              IconButton(
+                                icon: Image.asset(
+                                  AppImages.flag,
+                                  width: 24,
+                                  height: 24,
+                                  fit: BoxFit.fill,
+                                  filterQuality: FilterQuality.high,
+                                ),
+                                onPressed: () {
+                                  // Logic for priority
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: IconButton(
+                            icon: Image.asset(
+                              AppImages.send,
+                              width: 24,
+                              height: 24,
+                              fit: BoxFit.fill,
+                              filterQuality: FilterQuality.high,
+                            ),
+                            onPressed: () {
+                              // Logic for priority
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

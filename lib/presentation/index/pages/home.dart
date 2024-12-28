@@ -8,9 +8,7 @@ class IndexPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
         body: Column(
-      children: [
-        Header(),
-      ],
+      children: [Header()],
     ));
   }
 }

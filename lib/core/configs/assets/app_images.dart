@@ -12,4 +12,8 @@ class AppImages {
   static const profileOutlined = '${basePath}profile_outlined$format';
   static const sort = '${basePath}sort$format';
   static const profileImage = '${basePath}profile_image$format';
+  static const timer = '${basePath}timer$format';
+  static const tag = '${basePath}tag$format';
+  static const flag = '${basePath}flag$format';
+  static const send = '${basePath}send$format';
 }
