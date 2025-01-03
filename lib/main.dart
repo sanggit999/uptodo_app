@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:uptodo_app/common/cubit/button/button_cubit.dart';
 import 'package:uptodo_app/common/cubit/user/user_display_cubit.dart';
 import 'package:uptodo_app/core/configs/theme/app_theme.dart';
@@ -16,7 +17,7 @@ import 'presentation/auth/cubit/validate_form_cubit.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(const MyApp());
+  initializeDateFormatting().then((_) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

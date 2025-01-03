@@ -6,6 +6,7 @@ class UserMapper {
     return UserEntity(
         userId: userModel.userId,
         username: userModel.username,
-        image: userModel.image);
+        image: userModel.image,
+    );
   }
 }

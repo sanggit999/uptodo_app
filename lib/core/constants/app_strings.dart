@@ -47,4 +47,11 @@ class AppStrings {
   static const String calendar = 'Lịch';
   static const String focus = 'Tập trung';
   static const String profile = 'Hồ sơ';
+
+  static const String addTask = 'Thêm nhiệm vụ';
+  static const String title= 'Tiêu đề';
+  static const String description = 'Mô tả';
+  static const String cancel = 'Huỷ';
+  static const String chooesTime = 'Chọn thời gian';
+  static const String save = 'Lưu';
 }

@@ -63,7 +63,7 @@ class AuthRepositoryImpl implements AuthRepository {
         return Left(erorr);
       },
       (data) {
-        var user = UserMapper.toEntity(UserModel.fromJson(data));
+        var user = UserMapper.toEntity(UserModel.fromJson(data['user']));
         return Right(user);
       },
     );

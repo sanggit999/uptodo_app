@@ -71,7 +71,7 @@ class Header extends StatelessWidget {
             image: userEntity.image?.isEmpty ?? true
                 ? const AssetImage(AppImages.profileImage)
                 : NetworkImage(userEntity.image!),
-            fit: BoxFit.contain,
+            fit: BoxFit.fill,
             filterQuality: FilterQuality.high,
           ),
           shape: BoxShape.circle),
