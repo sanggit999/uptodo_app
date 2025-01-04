@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:uptodo_app/common/widgets/button/basic_reactive_button.dart';
 import 'package:uptodo_app/core/configs/assets/app_images.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
@@ -203,10 +204,13 @@ class _AppNavigationState extends State<AppNavigation> {
     );
   }
 
-  Future<void> _showAddTask(BuildContext context) {
+  Future<dynamic> _showAddTask(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      elevation: 0,
+      useRootNavigator: true,
+      useSafeArea: true,
       backgroundColor: const Color(0xff363636),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
@@ -304,7 +308,7 @@ class _AppNavigationState extends State<AppNavigation> {
                                   filterQuality: FilterQuality.high,
                                 ),
                                 onPressed: () {
-                                  // Logic for category
+                                  _showDialogCategory(context);
                                 },
                               ),
                               IconButton(
@@ -316,7 +320,7 @@ class _AppNavigationState extends State<AppNavigation> {
                                   filterQuality: FilterQuality.high,
                                 ),
                                 onPressed: () {
-                                  // Logic for priority
+                                  _showDialogPriority(context);
                                 },
                               ),
                             ],
@@ -360,7 +364,7 @@ class _AppNavigationState extends State<AppNavigation> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: TableCalendar(
                   focusedDay: DateTime.now(),
                   firstDay: DateTime.utc(2010, 1, 1),
@@ -440,7 +444,7 @@ class _AppNavigationState extends State<AppNavigation> {
                         style: ElevatedButton.styleFrom(
                             elevation: 0, padding: const EdgeInsets.all(16)),
                         child: const Text(
-                          AppStrings.chooesTime,
+                          AppStrings.chooseTime,
                           style: TextStyle(
                               color: AppColors.white,
                               fontSize: 16,
@@ -472,16 +476,16 @@ class _AppNavigationState extends State<AppNavigation> {
               children: [
                 OmniDateTimePicker(
                   separator: const Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8),
                     child: Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.all(16),
-                          child: Text(AppStrings.chooesTime,
+                          child: Text(AppStrings.chooseTime,
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.bold,
                               )),
                         ),
                         Divider(color: Colors.white),
@@ -543,6 +547,248 @@ class _AppNavigationState extends State<AppNavigation> {
                 )
               ],
             ));
+      },
+    );
+  }
+
+  Future<dynamic> _showDialogCategory(BuildContext context) {
+    final List<Map<String, dynamic>> categories = [
+      {
+        'icon': Icons.local_grocery_store,
+        'name': 'Grocery',
+        'color': Colors.greenAccent
+      },
+      {'icon': Icons.work, 'name': 'Work', 'color': Colors.orangeAccent},
+      {
+        'icon': Icons.fitness_center,
+        'name': 'Sport',
+        'color': Colors.lightBlueAccent
+      },
+      {
+        'icon': Icons.design_services,
+        'name': 'Design',
+        'color': Colors.tealAccent
+      },
+      {'icon': Icons.school, 'name': 'University', 'color': Colors.blueAccent},
+      {'icon': Icons.people, 'name': 'Social', 'color': Colors.pinkAccent},
+      {'icon': Icons.music_note, 'name': 'Music', 'color': Colors.purpleAccent},
+      {
+        'icon': Icons.health_and_safety,
+        'name': 'Health',
+        'color': Colors.green
+      },
+      {'icon': Icons.movie, 'name': 'Movie', 'color': Colors.cyanAccent},
+      {'icon': Icons.home, 'name': 'Home', 'color': Colors.orange},
+    ];
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: const Color(0xff363636),
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text(AppStrings.chooseCategory,
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+                const Divider(color: AppColors.white),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Wrap(
+                    spacing: 12,
+                    runSpacing: 20,
+                    children: [
+                      ...categories.map((category) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              decoration: BoxDecoration(
+                                color: category['color'],
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Icon(
+                                category['icon'],
+                                color: Colors.white,
+                                size: 32,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              category['name'],
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.lightGreen,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            AppStrings.createNew,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                BasicReactiveButton(
+                  title: AppStrings.addCategory,
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<dynamic> _showDialogPriority(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: const Color(0xff363636),
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(AppStrings.taskPriority,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    )),
+              ),
+              const Divider(color: AppColors.white),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: List.generate(
+                    10,
+                    (index) => GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: 64,
+                        height: 64,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[800],
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppImages.flag,
+                              width: 24,
+                              height: 24,
+                              fit: BoxFit.fill,
+                              filterQuality: FilterQuality.high,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              '${index + 1}',
+                              style: const TextStyle(
+                                color: AppColors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: Colors.transparent,
+                            padding: const EdgeInsets.all(16)),
+                        child: const Text(
+                          AppStrings.cancel,
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            elevation: 0, padding: const EdgeInsets.all(16)),
+                        child: const Text(
+                          AppStrings.save,
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+
+            ],
+          ),
+        );
       },
     );
   }
