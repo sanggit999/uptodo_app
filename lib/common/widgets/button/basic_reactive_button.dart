@@ -35,7 +35,6 @@ class BasicReactiveButton extends StatelessWidget {
           minimumSize:
               Size(width ?? MediaQuery.of(context).size.width, height ?? 50),
           backgroundColor: isLoading ? AppColors.primary : AppColors.primary,
-          padding: const EdgeInsets.all(16)
         ),
         child: isLoading
             ? const Center(

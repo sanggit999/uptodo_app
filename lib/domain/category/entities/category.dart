@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CategoryModel {
+class CategoryEntity {
   final String? categoryId;
   final String? userId;
   final String? name;
   final String? icon;
   final Color? color;
 
-  CategoryModel({
+  CategoryEntity({
     required this.categoryId,
     required this.userId,
     required this.name,
@@ -15,13 +15,4 @@ class CategoryModel {
     required this.color,
   });
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) {
-    return CategoryModel(
-      categoryId: json['_id'],
-      userId: json['userId'],
-      name: json['name'],
-      icon: json['icon'],
-      color: Color(int.parse(json['color'])),
-    );
-  }
 }

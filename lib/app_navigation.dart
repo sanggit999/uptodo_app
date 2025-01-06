@@ -4,9 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uptodo_app/common/widgets/button/basic_reactive_button.dart';
+import 'package:uptodo_app/common/widgets/icon_category.dart';
 import 'package:uptodo_app/core/configs/assets/app_images.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
+import 'package:uptodo_app/domain/category/entities/category.dart';
 import 'package:uptodo_app/presentation/calendar/pages/calendar.dart';
 import 'package:uptodo_app/presentation/focuse/pages/focuse.dart';
 import 'package:uptodo_app/presentation/index/pages/home.dart';
@@ -299,18 +301,7 @@ class _AppNavigationState extends State<AppNavigation> {
                                   _showDialogDate(context);
                                 },
                               ),
-                              IconButton(
-                                icon: Image.asset(
-                                  AppImages.tag,
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.fill,
-                                  filterQuality: FilterQuality.high,
-                                ),
-                                onPressed: () {
-                                  _showDialogCategory(context);
-                                },
-                              ),
+                          const  IconCategory(),
                               IconButton(
                                 icon: Image.asset(
                                   AppImages.flag,
@@ -551,36 +542,14 @@ class _AppNavigationState extends State<AppNavigation> {
     );
   }
 
-  Future<dynamic> _showDialogCategory(BuildContext context) {
-    final List<Map<String, dynamic>> categories = [
-      {
-        'icon': Icons.local_grocery_store,
-        'name': 'Grocery',
-        'color': Colors.greenAccent
-      },
-      {'icon': Icons.work, 'name': 'Work', 'color': Colors.orangeAccent},
-      {
-        'icon': Icons.fitness_center,
-        'name': 'Sport',
-        'color': Colors.lightBlueAccent
-      },
-      {
-        'icon': Icons.design_services,
-        'name': 'Design',
-        'color': Colors.tealAccent
-      },
-      {'icon': Icons.school, 'name': 'University', 'color': Colors.blueAccent},
-      {'icon': Icons.people, 'name': 'Social', 'color': Colors.pinkAccent},
-      {'icon': Icons.music_note, 'name': 'Music', 'color': Colors.purpleAccent},
-      {
-        'icon': Icons.health_and_safety,
-        'name': 'Health',
-        'color': Colors.green
-      },
-      {'icon': Icons.movie, 'name': 'Movie', 'color': Colors.cyanAccent},
-      {'icon': Icons.home, 'name': 'Home', 'color': Colors.orange},
-    ];
 
+
+
+
+
+
+  Future<dynamic> _showDialogCategory(
+      BuildContext context, List<CategoryEntity> categoryEntity) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -609,7 +578,7 @@ class _AppNavigationState extends State<AppNavigation> {
                     spacing: 12,
                     runSpacing: 20,
                     children: [
-                      ...categories.map((category) {
+                      ...categoryEntity.map((category) {
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -617,18 +586,13 @@ class _AppNavigationState extends State<AppNavigation> {
                               width: 64,
                               height: 64,
                               decoration: BoxDecoration(
-                                color: category['color'],
+                                color: category.color,
                                 borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Icon(
-                                category['icon'],
-                                color: Colors.white,
-                                size: 32,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              category['name'],
+                              category.name!,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -642,7 +606,8 @@ class _AppNavigationState extends State<AppNavigation> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(16),
+                            width: 64,
+                            height: 64,
                             decoration: BoxDecoration(
                               color: Colors.lightGreen,
                               borderRadius: BorderRadius.circular(4),

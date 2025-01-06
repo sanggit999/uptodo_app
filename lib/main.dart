@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:uptodo_app/common/cubit/button/button_cubit.dart';
+import 'package:uptodo_app/common/cubit/category/category_display_cubit.dart';
 import 'package:uptodo_app/common/cubit/user/user_display_cubit.dart';
 import 'package:uptodo_app/core/configs/theme/app_theme.dart';
 import 'package:uptodo_app/core/network/dio_client.dart';
@@ -37,7 +38,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => UserDisplayCubit()..displayUserInfo()),
         BlocProvider(create: (context) => ButtonCubit()),
-        BlocProvider(create: (context) => ValidateFormCubit())
+        BlocProvider(create: (context) => ValidateFormCubit()),
+        BlocProvider(
+            create: (context) => CategoryDisplayCubit()..displayCategory()),
       ],
       child: MaterialApp.router(
         title: 'UpTodo',
