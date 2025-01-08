@@ -35,15 +35,7 @@ class IconCategory extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(AppStrings.chooseCategory,
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              )),
-                        ),
+                        _titleChooseCategory(),
                         const Divider(color: AppColors.white),
                         BlocBuilder<CategoryDisplayCubit, CategoryDisplayState>(
                           builder: (context, state) {
@@ -57,18 +49,27 @@ class IconCategory extends StatelessWidget {
                                   context, state.categoryEntity);
                             }
 
-                            return _createCategory();
+                            return _iconCreateCategory();
                           },
                         ),
-                        BasicReactiveButton(
-                          title: AppStrings.addCategory,
-                          onPressed: () {},
-                        )
+                        _buttonAddCategory()
                       ],
                     ),
                   ));
             });
       },
+    );
+  }
+
+  Widget _titleChooseCategory() {
+    return const Padding(
+      padding: EdgeInsets.all(16),
+      child: Text(AppStrings.chooseCategory,
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          )),
     );
   }
 
@@ -136,7 +137,7 @@ class IconCategory extends StatelessWidget {
     );
   }
 
-  Widget _createCategory() {
+  Widget _iconCreateCategory() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -163,6 +164,13 @@ class IconCategory extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buttonAddCategory() {
+    return BasicReactiveButton(
+      title: AppStrings.addCategory,
+      onPressed: () {},
     );
   }
 }
