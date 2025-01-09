@@ -1,8 +1,8 @@
 class CategoryReq {
-  final String? userId;
-  final String? name;
-  final String? icon;
-  final String? color;
+  final String userId;
+  final String name;
+  final String icon;
+  final String color;
 
   CategoryReq({
     required this.userId,

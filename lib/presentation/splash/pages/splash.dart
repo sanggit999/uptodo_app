@@ -19,7 +19,7 @@ class SplashPage extends StatelessWidget {
             context.go('/onboading');
         }
         if (state is Authenticated) {
-          context.go('/app_navigation');
+          context.go('/navigation');
         }
       },
       child: Scaffold(

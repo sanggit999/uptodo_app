@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:uptodo_app/app_navigation/pages/app_navigation.dart';
+import 'package:uptodo_app/navigation/pages/app_navigation.dart';
 import 'package:uptodo_app/presentation/auth/pages/login.dart';
 import 'package:uptodo_app/presentation/auth/pages/register.dart';
 import 'package:uptodo_app/presentation/auth/pages/start.dart';
@@ -42,7 +42,7 @@ class AppRouter {
       ),
 
       GoRoute(
-        path: '/app_navigation',
+        path: '/navigation',
         builder: (context, state) => const AppNavigation(),
       ),
     ],

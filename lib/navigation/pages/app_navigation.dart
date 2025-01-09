@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo_app/app_navigation/widgets/add_task.dart';
 import 'package:uptodo_app/common/widgets/bottom_app_bar/bottom_app_bar.dart';
 import 'package:uptodo_app/core/configs/assets/app_images.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
+import 'package:uptodo_app/navigation/widgets/add_task.dart';
 import 'package:uptodo_app/presentation/calendar/pages/calendar.dart';
 import 'package:uptodo_app/presentation/focuse/pages/focuse.dart';
 import 'package:uptodo_app/presentation/index/pages/home.dart';
@@ -19,9 +19,6 @@ class AppNavigation extends StatefulWidget {
 class _AppNavigationState extends State<AppNavigation> {
   late final List<Widget> pages;
   int selectedIndex = 0;
-  int selectedHour = 0;
-  int selectedMinute = 0;
-  bool isAm = true;
 
   @override
   void initState() {

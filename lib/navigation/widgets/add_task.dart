@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo_app/app_navigation/widgets/icon_category.dart';
-import 'package:uptodo_app/app_navigation/widgets/icon_date_and_time.dart';
-import 'package:uptodo_app/app_navigation/widgets/icon_priority.dart';
-import 'package:uptodo_app/app_navigation/widgets/icon_send.dart';
+import 'package:uptodo_app/navigation/widgets/icon_category.dart';
+import 'package:uptodo_app/navigation/widgets/icon_date_and_time.dart';
+import 'package:uptodo_app/navigation/widgets/icon_priority.dart';
+import 'package:uptodo_app/navigation/widgets/icon_send.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
 
