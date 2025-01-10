@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
@@ -6,6 +7,8 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:uptodo_app/core/configs/assets/app_images.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
+import 'package:uptodo_app/navigation/cubit/calendar_cubit.dart';
+import 'package:uptodo_app/navigation/cubit/calendar_state.dart';
 
 class IconDateAndTime extends StatelessWidget {
   const IconDateAndTime({super.key});
@@ -46,50 +49,66 @@ class IconDateAndTime extends StatelessWidget {
   Widget _showDialogDate() {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: TableCalendar(
-        focusedDay: DateTime.now(),
-        firstDay: DateTime.utc(2010, 1, 1),
-        lastDay: DateTime.utc(2999, 1, 1),
-        locale: 'vi_VN',
-        rowHeight: 45,
-        daysOfWeekHeight: 45,
-        headerStyle: HeaderStyle(
-            titleTextFormatter: (date, locale) {
-              final month =
-                  DateFormat('MMMM', locale).format(date).toUpperCase();
-              final year = DateFormat('yyyy', locale).format(date);
-              return '$month\n$year';
-            },
-            titleTextStyle: const TextStyle(
-              fontSize: 14,
-              color: AppColors.white,
-              fontWeight: FontWeight.bold,
-            ),
-            formatButtonVisible: false,
-            titleCentered: true),
-        calendarStyle: CalendarStyle(
-          defaultDecoration: BoxDecoration(
-              color: const Color(0xff272727),
-              borderRadius: BorderRadius.circular(6)),
-          todayDecoration: BoxDecoration(
-              color: const Color(0xff272727),
-              borderRadius: BorderRadius.circular(6)),
-          weekendDecoration: BoxDecoration(
-              color: const Color(0xff272727),
-              borderRadius: BorderRadius.circular(6)),
-          weekendTextStyle: const TextStyle(color: AppColors.white),
-        ),
-        daysOfWeekStyle: const DaysOfWeekStyle(
-          decoration: BoxDecoration(
-              border: Border(
-                  top: BorderSide(color: AppColors.lightGray, width: 1))),
-          weekdayStyle:
-              TextStyle(fontWeight: FontWeight.bold, color: AppColors.white),
-          weekendStyle:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-        ),
-      ),
-    );
+        child: BlocBuilder<CalendarCubit, CalendarState>(
+          builder: (context, state) {
+            return TableCalendar(
+              focusedDay: state.focusedDay,
+              firstDay: DateTime.utc(2010, 1, 1),
+              lastDay: DateTime.utc(2999, 1, 1),
+              availableGestures: AvailableGestures.all,
+              locale: 'vi_VN',
+              rowHeight: 45,
+              daysOfWeekHeight: 45,
+              headerStyle: HeaderStyle(
+                  titleTextFormatter: (date, locale) {
+                    final month =
+                        DateFormat('MMMM', locale).format(date).toUpperCase();
+                    final year = DateFormat('yyyy', locale).format(date);
+                    return '$month\n$year';
+                  },
+                  titleTextStyle: const TextStyle(
+                    fontSize: 14,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  formatButtonVisible: false,
+                  titleCentered: true),
+              calendarStyle: CalendarStyle(
+                  selectedDecoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(6)),
+                  defaultDecoration: BoxDecoration(
+                      color: const Color(0xff272727),
+                      borderRadius: BorderRadius.circular(6)),
+                  todayDecoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(6)),
+                  weekendDecoration: BoxDecoration(
+                      color: const Color(0xff272727),
+                      borderRadius: BorderRadius.circular(6)),
+                  weekendTextStyle: const TextStyle(color: AppColors.white),
+                  isTodayHighlighted: true),
+              daysOfWeekStyle: const DaysOfWeekStyle(
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(color: AppColors.lightGray, width: 1))),
+                weekdayStyle: TextStyle(
+                    fontWeight: FontWeight.bold, color: AppColors.white),
+                weekendStyle:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+              ),
+              selectedDayPredicate: (day) => isSameDay(state.selectedDay, day),
+              onDaySelected: (selectedDay, focusedDay) {
+                context
+                    .read<CalendarCubit>()
+                    .selectedDay(selectedDay, focusedDay);
+
+                print(
+                    'Focused day => $focusedDay \n Selected day => $selectedDay');
+              },
+            );
+          },
+        ));
   }
 
   Widget _buttonCancelAndChooseTime(BuildContext context) {

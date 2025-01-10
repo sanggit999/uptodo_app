@@ -165,7 +165,7 @@ class _RegisterPageState extends State<RegisterPage> {
       obscureText: true,
       validator: (value) {
         context.read<ValidateFormCubit>().validatePassword(value!);
-        return context.read<ValidateFormCubit>().state.errordMessagePassword;
+        return context.read<ValidateFormCubit>().state.errorMessagePassword;
       },
     );
   }

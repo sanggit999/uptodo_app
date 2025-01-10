@@ -5,19 +5,19 @@ part 'validate_form_state.g.dart';
 @CopyWith()
 class ValidateFormState extends Equatable {
   final String? errorMessageUserName;
-  final String? errordMessagePassword;
+  final String? errorMessagePassword;
   final String? errorMessageConfirmPassword;
 
   const ValidateFormState({
     this.errorMessageUserName,
-    this.errordMessagePassword,
+    this.errorMessagePassword,
     this.errorMessageConfirmPassword,
   });
 
   @override
   List<Object?> get props => [
         errorMessageUserName,
-        errordMessagePassword,
+        errorMessagePassword,
         errorMessageConfirmPassword
       ];
 }

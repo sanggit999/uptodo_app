@@ -11,6 +11,8 @@ import 'package:uptodo_app/core/router/app_router.dart';
 import 'package:uptodo_app/data/auth/repositories/auth_repository_impl.dart';
 import 'package:uptodo_app/data/auth/sources/auth_api_service.dart';
 import 'package:uptodo_app/domain/auth/usecases/is_logged_in.dart';
+import 'package:uptodo_app/navigation/cubit/calendar_cubit.dart';
+import 'package:uptodo_app/presentation/onboading/cubit/onboading_cubit.dart';
 import 'package:uptodo_app/presentation/splash/cubit/splash_cubit.dart';
 
 import 'presentation/auth/cubit/validate_form_cubit.dart';
@@ -35,12 +37,16 @@ class MyApp extends StatelessWidget {
               AuthRepositoryImpl(AuthApiServiceImpl(DioClient()))))
             ..appStarted(),
         ),
+        BlocProvider(create: (_) => OnboadingCubit()),
         BlocProvider(
             create: (context) => UserDisplayCubit()..displayUserInfo()),
         BlocProvider(create: (context) => ButtonCubit()),
         BlocProvider(create: (context) => ValidateFormCubit()),
         BlocProvider(
             create: (context) => CategoryDisplayCubit()..displayCategory()),
+        BlocProvider(
+          create: (context) => CalendarCubit()..resetSelectedDate(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'UpTodo',

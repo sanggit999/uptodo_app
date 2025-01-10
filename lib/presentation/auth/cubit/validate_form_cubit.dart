@@ -25,13 +25,13 @@ class ValidateFormCubit extends Cubit<ValidateFormState> {
         r'^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,20}$');
 
     if (password.isEmpty) {
-      emit(state.copyWith(errordMessagePassword: AppStrings.passwordEmpty));
+      emit(state.copyWith(errorMessagePassword: AppStrings.passwordEmpty));
     } else if (password.length <= 5) {
-      emit(state.copyWith(errordMessagePassword: AppStrings.passwordTooShort));
+      emit(state.copyWith(errorMessagePassword: AppStrings.passwordTooShort));
     } else if (!passwordRegex.hasMatch(password)) {
-      emit(state.copyWith(errordMessagePassword: AppStrings.passwordInvalid));
+      emit(state.copyWith(errorMessagePassword: AppStrings.passwordInvalid));
     } else {
-      emit(state.copyWith(errordMessagePassword: null));
+      emit(state.copyWith(errorMessagePassword: null));
     }
   }
 

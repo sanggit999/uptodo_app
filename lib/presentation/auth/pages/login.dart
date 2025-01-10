@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
       obscureText: true,
       validator: (value) {
         context.read<ValidateFormCubit>().validatePassword(value!);
-        return context.read<ValidateFormCubit>().state.errordMessagePassword;
+        return context.read<ValidateFormCubit>().state.errorMessagePassword;
       },
     );
   }

@@ -9,7 +9,7 @@ part of 'validate_form_state.dart';
 abstract class _$ValidateFormStateCWProxy {
   ValidateFormState errorMessageUserName(String? errorMessageUserName);
 
-  ValidateFormState errordMessagePassword(String? errordMessagePassword);
+  ValidateFormState errorMessagePassword(String? errorMessagePassword);
 
   ValidateFormState errorMessageConfirmPassword(
       String? errorMessageConfirmPassword);
@@ -22,7 +22,7 @@ abstract class _$ValidateFormStateCWProxy {
   /// ````
   ValidateFormState call({
     String? errorMessageUserName,
-    String? errordMessagePassword,
+    String? errorMessagePassword,
     String? errorMessageConfirmPassword,
   });
 }
@@ -38,8 +38,8 @@ class _$ValidateFormStateCWProxyImpl implements _$ValidateFormStateCWProxy {
       this(errorMessageUserName: errorMessageUserName);
 
   @override
-  ValidateFormState errordMessagePassword(String? errordMessagePassword) =>
-      this(errordMessagePassword: errordMessagePassword);
+  ValidateFormState errorMessagePassword(String? errorMessagePassword) =>
+      this(errorMessagePassword: errorMessagePassword);
 
   @override
   ValidateFormState errorMessageConfirmPassword(
@@ -56,7 +56,7 @@ class _$ValidateFormStateCWProxyImpl implements _$ValidateFormStateCWProxy {
   /// ````
   ValidateFormState call({
     Object? errorMessageUserName = const $CopyWithPlaceholder(),
-    Object? errordMessagePassword = const $CopyWithPlaceholder(),
+    Object? errorMessagePassword = const $CopyWithPlaceholder(),
     Object? errorMessageConfirmPassword = const $CopyWithPlaceholder(),
   }) {
     return ValidateFormState(
@@ -64,11 +64,10 @@ class _$ValidateFormStateCWProxyImpl implements _$ValidateFormStateCWProxy {
           ? _value.errorMessageUserName
           // ignore: cast_nullable_to_non_nullable
           : errorMessageUserName as String?,
-      errordMessagePassword:
-          errordMessagePassword == const $CopyWithPlaceholder()
-              ? _value.errordMessagePassword
-              // ignore: cast_nullable_to_non_nullable
-              : errordMessagePassword as String?,
+      errorMessagePassword: errorMessagePassword == const $CopyWithPlaceholder()
+          ? _value.errorMessagePassword
+          // ignore: cast_nullable_to_non_nullable
+          : errorMessagePassword as String?,
       errorMessageConfirmPassword:
           errorMessageConfirmPassword == const $CopyWithPlaceholder()
               ? _value.errorMessageConfirmPassword

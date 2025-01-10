@@ -14,10 +14,8 @@ class OnboadingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => OnboadingCubit(),
-      child: Scaffold(body: BlocBuilder<OnboadingCubit, int>(
-        builder: (context, state) {
+    return Scaffold(body: BlocBuilder<OnboadingCubit, int>(
+      builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -31,8 +29,7 @@ class OnboadingPage extends StatelessWidget {
             ),
           );
         },
-      )),
-    );
+    ));
   }
 
   Widget _skip(BuildContext context) {
