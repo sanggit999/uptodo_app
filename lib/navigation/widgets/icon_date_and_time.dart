@@ -9,9 +9,21 @@ import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
 import 'package:uptodo_app/navigation/cubit/calendar_cubit.dart';
 import 'package:uptodo_app/navigation/cubit/calendar_state.dart';
+import 'package:uptodo_app/navigation/cubit/time_cubit.dart';
 
-class IconDateAndTime extends StatelessWidget {
+class IconDateAndTime extends StatefulWidget {
   const IconDateAndTime({super.key});
+
+  @override
+  State<IconDateAndTime> createState() => _IconDateAndTimeState();
+}
+
+class _IconDateAndTimeState extends State<IconDateAndTime> {
+  @override
+  void initState() {
+    context.read<CalendarCubit>().resetSelectedDate();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +60,7 @@ class IconDateAndTime extends StatelessWidget {
 
   Widget _showDialogDate() {
     return Padding(
-      padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: BlocBuilder<CalendarCubit, CalendarState>(
           builder: (context, state) {
             return TableCalendar(
@@ -104,7 +116,7 @@ class IconDateAndTime extends StatelessWidget {
                     .selectedDay(selectedDay, focusedDay);
 
                 print(
-                    'Focused day => $focusedDay \n Selected day => $selectedDay');
+                    'Selected day =>$selectedDay \nFocused day =>$focusedDay');
               },
             );
           },
@@ -198,7 +210,11 @@ class IconDateAndTime extends StatelessWidget {
         ),
       ),
       type: OmniDateTimePickerType.time,
-      onDateTimeChanged: (value) {},
+      onDateTimeChanged: (value) {
+        context.read<TimeCubit>().selectedTime(value);
+
+        print('Time selected =>$value');
+      },
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
@@ -238,7 +254,13 @@ class IconDateAndTime extends StatelessWidget {
           ),
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final selectedDay =
+                    context.read<CalendarCubit>().state.selectedDay;
+                final selectedTime = context.read<TimeCubit>().state;
+                context.pop();
+                print('Day =>$selectedDay \nTime =>$selectedTime');
+              },
               style: ElevatedButton.styleFrom(
                   elevation: 0, padding: const EdgeInsets.all(16)),
               child: const Text(

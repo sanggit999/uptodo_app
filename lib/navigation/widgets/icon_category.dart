@@ -7,6 +7,7 @@ import 'package:uptodo_app/core/configs/assets/app_images.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
 import 'package:uptodo_app/domain/category/entities/category.dart';
+import 'package:uptodo_app/navigation/cubit/category_cubit.dart';
 
 class IconCategory extends StatelessWidget {
   const IconCategory({super.key});
@@ -75,65 +76,110 @@ class IconCategory extends StatelessWidget {
 
   Widget _getCategories(
       BuildContext context, List<CategoryEntity> categoryEntity) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Wrap(
-        spacing: 12,
-        runSpacing: 20,
-        children: [
-          ...categoryEntity.map((category) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 64,
-                  height: 64,
-                  decoration: BoxDecoration(
-                    color: category.color,
-                    borderRadius: BorderRadius.circular(4),
+    return BlocBuilder<CategoryCubit, int>(
+      builder: (context, state) {
+        return Flexible(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, // Số cột trong lưới
+              crossAxisSpacing: 10, // Khoảng cách ngang giữa các mục
+              mainAxisSpacing: 10, // Khoảng cách dọc giữa các mục
+              //childAspectRatio: 1, // Tỉ lệ chiều rộng/chiều cao
+            ),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            itemCount: categoryEntity.length + 1, // Thêm 1 cho nút "Tạo mới"
+            itemBuilder: (context, index) {
+              // Nút "Tạo mới" ở cuối danh sách
+              if (index == categoryEntity.length) {
+                return GestureDetector(
+                  onTap: () {
+                    // Xử lý sự kiện tạo mới
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 64,
+                        height: 64,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreen,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          color: AppColors.white,
+                          size: 32,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text(
+                        AppStrings.createNew,
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
+                );
+              }
+
+              final category = categoryEntity[index];
+              final isSelected = state == index;
+
+              return GestureDetector(
+                onTap: () {
+                  context.read<CategoryCubit>().itemSelection(index);
+
+                  print(
+                      'Category selection =>${context.read<CategoryCubit>().state}');
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: category.color,
+                        borderRadius: BorderRadius.circular(4),
+                        border: isSelected
+                            ? Border.all(
+                                color: AppColors.primary,
+                                width: 5,
+                              )
+                            : null,
+                      ),
+                      child: Center(
+                        child: Image.network(
+                          category.icon!,
+                          width: 32,
+                          height: 32,
+                          fit: BoxFit.contain,
+                          filterQuality: FilterQuality.high,
+                          scale: 1.0,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      category.name!,
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  category.name!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            );
-          }),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 64,
-                height: 64,
-                decoration: BoxDecoration(
-                  color: Colors.lightGreen,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                AppStrings.createNew,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+              );
+            },
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

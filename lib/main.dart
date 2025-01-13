@@ -12,6 +12,9 @@ import 'package:uptodo_app/data/auth/repositories/auth_repository_impl.dart';
 import 'package:uptodo_app/data/auth/sources/auth_api_service.dart';
 import 'package:uptodo_app/domain/auth/usecases/is_logged_in.dart';
 import 'package:uptodo_app/navigation/cubit/calendar_cubit.dart';
+import 'package:uptodo_app/navigation/cubit/category_cubit.dart';
+import 'package:uptodo_app/navigation/cubit/priority_cubit.dart';
+import 'package:uptodo_app/navigation/cubit/time_cubit.dart';
 import 'package:uptodo_app/presentation/onboading/cubit/onboading_cubit.dart';
 import 'package:uptodo_app/presentation/splash/cubit/splash_cubit.dart';
 
@@ -38,14 +41,21 @@ class MyApp extends StatelessWidget {
             ..appStarted(),
         ),
         BlocProvider(create: (_) => OnboadingCubit()),
+        BlocProvider(create: (_) => UserDisplayCubit()..displayUserInfo()),
+        BlocProvider(create: (_) => ButtonCubit()),
+        BlocProvider(create: (_) => ValidateFormCubit()),
+        BlocProvider(create: (_) => CategoryDisplayCubit()..displayCategory()),
         BlocProvider(
-            create: (context) => UserDisplayCubit()..displayUserInfo()),
-        BlocProvider(create: (context) => ButtonCubit()),
-        BlocProvider(create: (context) => ValidateFormCubit()),
+          create: (_) => CalendarCubit(),
+        ),
         BlocProvider(
-            create: (context) => CategoryDisplayCubit()..displayCategory()),
+          create: (_) => TimeCubit(),
+        ),
         BlocProvider(
-          create: (context) => CalendarCubit()..resetSelectedDate(),
+          create: (_) => CategoryCubit(),
+        ),
+        BlocProvider(
+          create: (_) => PriorityCubit(),
         ),
       ],
       child: MaterialApp.router(

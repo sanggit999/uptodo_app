@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uptodo_app/core/configs/assets/app_images.dart';
 import 'package:uptodo_app/core/configs/theme/app_colors.dart';
 import 'package:uptodo_app/core/constants/app_strings.dart';
+import 'package:uptodo_app/navigation/cubit/priority_cubit.dart';
 
 class IconPriority extends StatelessWidget {
   const IconPriority({super.key});
@@ -58,49 +60,64 @@ class IconPriority extends StatelessWidget {
   }
 
   Widget _showDialogPriority(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Wrap(
-        spacing: 12,
-        runSpacing: 12,
-        children: List.generate(
-          10,
-          (index) => GestureDetector(
-            onTap: () {},
-            child: Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AppImages.flag,
-                    width: 24,
-                    height: 24,
-                    fit: BoxFit.fill,
-                    filterQuality: FilterQuality.high,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '${index + 1}',
-                    style: const TextStyle(
-                      color: AppColors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
+    return BlocBuilder<PriorityCubit, int>(
+      builder: (context, state) {
+        return Flexible(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              //childAspectRatio: 1,
             ),
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              final isSelected = state == index;
+              return GestureDetector(
+                onTap: () {
+                  context.read<PriorityCubit>().itemSelection(index);
+                  print(
+                      'Priority selection =>${context.read<PriorityCubit>().state}');
+                },
+                child: Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppColors.primary : Colors.grey[800],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        AppImages.flag,
+                        width: 24,
+                        height: 24,
+                        fit: BoxFit.fill,
+                        filterQuality: FilterQuality.high,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        '${index + 1}',
+                        style: const TextStyle(
+                          color: AppColors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
