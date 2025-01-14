@@ -148,7 +148,10 @@ class IconPriority extends StatelessWidget {
           ),
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<PriorityCubit>().state;
+                context.pop();
+              },
               style: ElevatedButton.styleFrom(
                   elevation: 0, padding: const EdgeInsets.all(16)),
               child: const Text(

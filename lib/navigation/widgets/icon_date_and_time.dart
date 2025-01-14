@@ -255,11 +255,10 @@ class _IconDateAndTimeState extends State<IconDateAndTime> {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                final selectedDay =
-                    context.read<CalendarCubit>().state.selectedDay;
-                final selectedTime = context.read<TimeCubit>().state;
+                context.read<CalendarCubit>().state.selectedDay;
+                context.read<TimeCubit>().state;
                 context.pop();
-                print('Day =>$selectedDay \nTime =>$selectedTime');
+                // print('Day =>$selectedDay \nTime =>$selectedTime');
               },
               style: ElevatedButton.styleFrom(
                   elevation: 0, padding: const EdgeInsets.all(16)),

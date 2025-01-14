@@ -108,6 +108,7 @@ class _AppNavigationState extends State<AppNavigation> {
   Future<void> _showAddTask(BuildContext context) {
     return showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       backgroundColor: const Color(0xff363636),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),

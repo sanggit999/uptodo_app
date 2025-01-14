@@ -6,4 +6,8 @@ class CategoryCubit extends Cubit<int> {
   void itemSelection(int index) {
     emit(index);
   }
+
+  void resetSelection() {
+    emit(0);
+  }
 }

@@ -9,8 +9,19 @@ import 'package:uptodo_app/core/constants/app_strings.dart';
 import 'package:uptodo_app/domain/category/entities/category.dart';
 import 'package:uptodo_app/navigation/cubit/category_cubit.dart';
 
-class IconCategory extends StatelessWidget {
+class IconCategory extends StatefulWidget {
   const IconCategory({super.key});
+
+  @override
+  State<IconCategory> createState() => _IconCategoryState();
+}
+
+class _IconCategoryState extends State<IconCategory> {
+  @override
+  void initState() {
+    context.read<CategoryCubit>().resetSelection();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +144,6 @@ class IconCategory extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   context.read<CategoryCubit>().itemSelection(index);
-
                   print(
                       'Category selection =>${context.read<CategoryCubit>().state}');
                 },
