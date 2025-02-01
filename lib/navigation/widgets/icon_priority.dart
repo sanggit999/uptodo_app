@@ -60,7 +60,7 @@ class IconPriority extends StatelessWidget {
   }
 
   Widget _showDialogPriority(BuildContext context) {
-    return BlocBuilder<PriorityCubit, int>(
+    return BlocBuilder<PriorityCubit, String>(
       builder: (context, state) {
         return Flexible(
           child: GridView.builder(
@@ -75,7 +75,7 @@ class IconPriority extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             itemCount: 10,
             itemBuilder: (context, index) {
-              final isSelected = state == index;
+              final isSelected = state == index.toString();
               return GestureDetector(
                 onTap: () {
                   context.read<PriorityCubit>().itemSelection(index);

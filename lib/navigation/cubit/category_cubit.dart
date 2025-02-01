@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CategoryCubit extends Cubit<int> {
-  CategoryCubit() : super(0);
+class CategoryCubit extends Cubit<String?> {
+  CategoryCubit() : super(null);
 
-  void itemSelection(int index) {
-    emit(index);
+  void itemSelection(String categoryId) {
+    emit(categoryId);
   }
 
   void resetSelection() {
-    emit(0);
+    emit(null);
   }
 }

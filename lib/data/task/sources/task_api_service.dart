@@ -18,8 +18,9 @@ class TaskApiServiceImpl implements TaskApiService {
   @override
   Future<Either> addTask(TaskReq taskReq) async {
     try {
+      print('Data: =>${taskReq.toJson()}');
       var response =
-          await dioClient.post(AppUrl.addTask, data: taskReq.toMap());
+          await dioClient.post(AppUrl.addTask, data: taskReq.toJson());
       return Right(response.data);
     } on DioException catch (e) {
       return Left(e.response!.data['message']);

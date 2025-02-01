@@ -14,6 +14,7 @@ import 'package:uptodo_app/domain/auth/usecases/is_logged_in.dart';
 import 'package:uptodo_app/navigation/cubit/calendar_cubit.dart';
 import 'package:uptodo_app/navigation/cubit/category_cubit.dart';
 import 'package:uptodo_app/navigation/cubit/priority_cubit.dart';
+import 'package:uptodo_app/navigation/cubit/task_cubit.dart';
 import 'package:uptodo_app/navigation/cubit/time_cubit.dart';
 import 'package:uptodo_app/presentation/onboading/cubit/onboading_cubit.dart';
 import 'package:uptodo_app/presentation/splash/cubit/splash_cubit.dart';
@@ -56,6 +57,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => PriorityCubit(),
+        ),
+        BlocProvider(
+          create: (_) => TaskCubit(),
         ),
       ],
       child: MaterialApp.router(

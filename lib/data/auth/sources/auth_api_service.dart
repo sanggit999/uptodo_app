@@ -22,7 +22,7 @@ class AuthApiServiceImpl implements AuthApiService {
   Future<Either> signin(SignInReq signInReq) async {
     try {
       var response =
-          await dioClient.post(AppUrl.signin, data: signInReq.toMap());
+          await dioClient.post(AppUrl.signin, data: signInReq.toJson());
       return Right(response.data);
     } on DioException catch (e) {
       return Left(e.response!.data['message']);
@@ -33,7 +33,7 @@ class AuthApiServiceImpl implements AuthApiService {
   Future<Either> signup(SignUpReq signUpReq) async {
     try {
       var response =
-          await dioClient.post(AppUrl.signup, data: signUpReq.toMap());
+          await dioClient.post(AppUrl.signup, data: signUpReq.toJson());
       return Right(response.data);
     } on DioException catch (e) {
       return Left(e.response!.data['message']);

@@ -11,7 +11,7 @@ class CategoryReq {
     required this.color,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'userId': userId,
       'name': name,

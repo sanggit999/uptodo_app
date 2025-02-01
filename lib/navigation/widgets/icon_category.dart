@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uptodo_app/common/cubit/category/category_display_cubit.dart';
 import 'package:uptodo_app/common/cubit/category/category_display_state.dart';
 import 'package:uptodo_app/common/widgets/button/basic_reactive_button.dart';
@@ -87,7 +88,7 @@ class _IconCategoryState extends State<IconCategory> {
 
   Widget _getCategories(
       BuildContext context, List<CategoryEntity> categoryEntity) {
-    return BlocBuilder<CategoryCubit, int>(
+    return BlocBuilder<CategoryCubit, String?>(
       builder: (context, state) {
         return Flexible(
           child: GridView.builder(
@@ -139,13 +140,15 @@ class _IconCategoryState extends State<IconCategory> {
               }
 
               final category = categoryEntity[index];
-              final isSelected = state == index;
+              final isSelected = state == category.categoryId;
 
               return GestureDetector(
                 onTap: () {
-                  context.read<CategoryCubit>().itemSelection(index);
+                  context
+                      .read<CategoryCubit>()
+                      .itemSelection(category.categoryId!);
                   print(
-                      'Category selection =>${context.read<CategoryCubit>().state}');
+                      'Category selection =>${context.read<CategoryCubit>().state}->$index');
                 },
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -154,7 +157,7 @@ class _IconCategoryState extends State<IconCategory> {
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
-                        color: category.color,
+                        color: Color(int.parse(category.color!)),
                         borderRadius: BorderRadius.circular(4),
                         border: isSelected
                             ? Border.all(
@@ -226,7 +229,10 @@ class _IconCategoryState extends State<IconCategory> {
   Widget _buttonAddCategory() {
     return BasicReactiveButton(
       title: AppStrings.addCategory,
-      onPressed: () {},
+      onPressed: () {
+        context.read<CategoryCubit>().state;
+        context.pop();
+      },
     );
   }
 }

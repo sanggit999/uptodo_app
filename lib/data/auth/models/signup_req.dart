@@ -7,7 +7,7 @@ class SignUpReq {
     required this.password,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'username': username,
       'password': password,

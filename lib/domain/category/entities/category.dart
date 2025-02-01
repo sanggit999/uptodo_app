@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-
 class CategoryEntity {
   final String? categoryId;
   final String? userId;
   final String? name;
   final String? icon;
-  final Color? color;
+  final String? color;
 
   CategoryEntity({
     required this.categoryId,
@@ -14,5 +12,4 @@ class CategoryEntity {
     required this.icon,
     required this.color,
   });
-
 }

@@ -34,12 +34,24 @@ class LoggerInterceptor extends Interceptor {
   }
 }
 
-class AuthorizationInterceptor extends Interceptor{
+class AuthorizationInterceptor extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler)  async{
-      final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      final token = sharedPreferences.getString('token');
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    final token = sharedPreferences.getString('token');
+
+    if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
-      handler.next(options);
+      print("Token added to request headers: $token");
+    } else {
+      print("Token không tồn tại");
+    }
+
+    print("Request URL: ${options.uri}");
+    print("Request Headers: ${options.headers}");
+
+    handler.next(options);
   }
 }

@@ -10,4 +10,13 @@ class CategoryMapper {
         icon: categoryModel.icon,
         color: categoryModel.color);
   }
+
+  static CategoryModel fromEntity(CategoryEntity categoryEntity) {
+    return CategoryModel(
+        categoryId: categoryEntity.categoryId,
+        userId: categoryEntity.userId,
+        name: categoryEntity.name,
+        icon: categoryEntity.icon,
+        color: categoryEntity.color);
+  }
 }

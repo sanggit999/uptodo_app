@@ -17,30 +17,24 @@ class AppRouter {
       ),
       GoRoute(
         path: '/onboading',
-        builder: (context, state) =>  OnboadingPage(),
+        builder: (context, state) => OnboadingPage(),
       ),
-
       GoRoute(
         path: '/start',
         builder: (context, state) => const StartPage(),
       ),
-
       GoRoute(
         path: '/login',
-        builder: (context, state) =>  const LoginPage(),
+        builder: (context, state) => const LoginPage(),
       ),
-
       GoRoute(
         path: '/register',
-        builder: (context, state) =>  const RegisterPage(),
+        builder: (context, state) => const RegisterPage(),
       ),
-
-
       GoRoute(
         path: '/index',
         builder: (context, state) => const IndexPage(),
       ),
-
       GoRoute(
         path: '/navigation',
         builder: (context, state) => const AppNavigation(),

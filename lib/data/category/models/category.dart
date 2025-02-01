@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-
 class CategoryModel {
   final String? categoryId;
   final String? userId;
   final String? name;
   final String? icon;
-  final Color? color;
+  final String? color;
 
   CategoryModel({
     required this.categoryId,
@@ -21,7 +19,17 @@ class CategoryModel {
       userId: json['userId'],
       name: json['name'],
       icon: json['icon'],
-      color: Color(int.parse(json['color'])),
+      color: json['color'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'categoryId': categoryId,
+      'userId': userId,
+      'name': name,
+      'icon': icon,
+      'color': color,
+    };
   }
 }

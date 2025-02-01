@@ -41,7 +41,7 @@ class DioClient {
   // Method Post
   Future<Response> post(
     String url, {
-    data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     ProgressCallback? onSendProgress,

@@ -19,7 +19,7 @@ class CategoryApiServiceImpl implements CategoryApiService {
   Future<Either> addCategory(CategoryReq categoryReq) async {
     try {
       var response =
-          await dioClient.post(AppUrl.addCategory, data: categoryReq.toMap());
+          await dioClient.post(AppUrl.addCategory, data: categoryReq.toJson());
       return Right(response.data);
     } on DioException catch (e) {
       return Left(e.response!.data['message']);
