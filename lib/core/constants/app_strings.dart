@@ -49,7 +49,7 @@ class AppStrings {
   static const String profile = 'Hồ sơ';
 
   static const String addTask = 'Thêm nhiệm vụ';
-  static const String title= 'Tiêu đề';
+  static const String title = 'Tiêu đề';
   static const String description = 'Mô tả';
   static const String cancel = 'Huỷ';
   static const String chooseTime = 'Chọn thời gian';
@@ -57,10 +57,14 @@ class AppStrings {
 
   static const String taskPriority = 'Ưu tiên nhiệm vụ';
   static const String createNew = 'Tạo mới';
-  static const String addCategory  = 'Thêm danh mục';
-  static const String chooseCategory   = 'Chọn danh mục';
+  static const String addCategory = 'Thêm danh mục';
+  static const String chooseCategory = 'Chọn danh mục';
   static const String createNewCategory = 'Tạo danh mục mới';
   static const String categoryName = 'Tên danh mục';
   static const String categoryIcon = 'Biểu tượng danh mục';
   static const String categoryColor = 'Màu sắc danh mục';
+
+  static const String searchForYourTask = 'Tìm kiếm nhiệm vụ của bạn...';
+  static const String today = 'Hôm nay';
+  static const String completed = 'Hoàn thành';
 }

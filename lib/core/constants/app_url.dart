@@ -1,5 +1,5 @@
 class AppUrl {
-  static const baseUrl = 'http://192.168.1.47:8000';
+  static const baseUrl = 'http://192.168.0.100:8000';
   static const apiV = '/api';
 
   static const signup = '$apiV/auth/signup';

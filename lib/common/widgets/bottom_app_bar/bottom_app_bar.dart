@@ -18,27 +18,28 @@ class BasicBottomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        GestureDetector(
-            onTap: onTap,
-            child: Image(
-              image: AssetImage(isSelected ? selectedIcon : unselectedIcon),
-              fit: BoxFit.fill,
-              filterQuality: FilterQuality.high,
-              height: 24,
-              width: 24,
-            )),
-        Text(
-          label,
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image(
+            image: AssetImage(isSelected ? selectedIcon : unselectedIcon),
+            fit: BoxFit.fill,
+            filterQuality: FilterQuality.high,
+            height: 24,
+            width: 24,
           ),
-        )
-      ],
+          Text(
+            label,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

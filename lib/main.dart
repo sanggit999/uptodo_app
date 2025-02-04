@@ -46,21 +46,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ButtonCubit()),
         BlocProvider(create: (_) => ValidateFormCubit()),
         BlocProvider(create: (_) => CategoryDisplayCubit()..displayCategory()),
-        BlocProvider(
-          create: (_) => CalendarCubit(),
-        ),
-        BlocProvider(
-          create: (_) => TimeCubit(),
-        ),
-        BlocProvider(
-          create: (_) => CategoryCubit(),
-        ),
-        BlocProvider(
-          create: (_) => PriorityCubit(),
-        ),
-        BlocProvider(
-          create: (_) => TaskCubit(),
-        ),
+        BlocProvider(create: (_) => CalendarCubit()),
+        BlocProvider(create: (_) => TimeCubit()),
+        BlocProvider(create: (_) => CategoryCubit()),
+        BlocProvider(create: (_) => PriorityCubit()),
+        BlocProvider(create: (_) => TaskCubit()),
       ],
       child: MaterialApp.router(
         title: 'UpTodo',
